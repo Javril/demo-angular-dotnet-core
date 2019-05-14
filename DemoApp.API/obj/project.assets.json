@@ -12418,11 +12418,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/javrilbavogui/Documents/dotnet/demoapp/DemoApp.API/DemoApp.API.csproj",
+      "projectUniqueName": "/Users/javrilbavogui/Documents/dotnet/angular-dotnet-demo/DemoApp.API/DemoApp.API.csproj",
       "projectName": "DemoApp.API",
-      "projectPath": "/Users/javrilbavogui/Documents/dotnet/demoapp/DemoApp.API/DemoApp.API.csproj",
+      "projectPath": "/Users/javrilbavogui/Documents/dotnet/angular-dotnet-demo/DemoApp.API/DemoApp.API.csproj",
       "packagesPath": "/Users/javrilbavogui/.nuget/packages/",
-      "outputPath": "/Users/javrilbavogui/Documents/dotnet/demoapp/DemoApp.API/obj/",
+      "outputPath": "/Users/javrilbavogui/Documents/dotnet/angular-dotnet-demo/DemoApp.API/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
