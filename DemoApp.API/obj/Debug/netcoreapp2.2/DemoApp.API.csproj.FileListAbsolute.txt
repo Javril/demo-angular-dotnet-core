@@ -1,0 +1,14 @@
+/Users/javrilbavogui/Documents/dotnet/demoapp/DemoApp.API/bin/Debug/netcoreapp2.2/DemoApp.API.deps.json
+/Users/javrilbavogui/Documents/dotnet/demoapp/DemoApp.API/bin/Debug/netcoreapp2.2/DemoApp.API.runtimeconfig.json
+/Users/javrilbavogui/Documents/dotnet/demoapp/DemoApp.API/bin/Debug/netcoreapp2.2/DemoApp.API.runtimeconfig.dev.json
+/Users/javrilbavogui/Documents/dotnet/demoapp/DemoApp.API/bin/Debug/netcoreapp2.2/DemoApp.API.dll
+/Users/javrilbavogui/Documents/dotnet/demoapp/DemoApp.API/bin/Debug/netcoreapp2.2/DemoApp.API.pdb
+/Users/javrilbavogui/Documents/dotnet/demoapp/DemoApp.API/obj/Debug/netcoreapp2.2/DemoApp.API.csprojAssemblyReference.cache
+/Users/javrilbavogui/Documents/dotnet/demoapp/DemoApp.API/obj/Debug/netcoreapp2.2/DemoApp.API.csproj.CoreCompileInputs.cache
+/Users/javrilbavogui/Documents/dotnet/demoapp/DemoApp.API/obj/Debug/netcoreapp2.2/DemoApp.API.RazorAssemblyInfo.cache
+/Users/javrilbavogui/Documents/dotnet/demoapp/DemoApp.API/obj/Debug/netcoreapp2.2/DemoApp.API.RazorAssemblyInfo.cs
+/Users/javrilbavogui/Documents/dotnet/demoapp/DemoApp.API/obj/Debug/netcoreapp2.2/DemoApp.API.AssemblyInfoInputs.cache
+/Users/javrilbavogui/Documents/dotnet/demoapp/DemoApp.API/obj/Debug/netcoreapp2.2/DemoApp.API.AssemblyInfo.cs
+/Users/javrilbavogui/Documents/dotnet/demoapp/DemoApp.API/obj/Debug/netcoreapp2.2/DemoApp.API.RazorTargetAssemblyInfo.cache
+/Users/javrilbavogui/Documents/dotnet/demoapp/DemoApp.API/obj/Debug/netcoreapp2.2/DemoApp.API.dll
+/Users/javrilbavogui/Documents/dotnet/demoapp/DemoApp.API/obj/Debug/netcoreapp2.2/DemoApp.API.pdb
