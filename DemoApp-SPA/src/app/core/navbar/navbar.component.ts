@@ -21,10 +21,8 @@ export class NavbarComponent implements OnInit {
 
   login = () => {
     this.usersService.login(this.model)
-      .subscribe((res: any) => {
-        console.log(res.token);
-        localStorage.setItem('token', res.token);
-        this.router.navigate(['/values']);
+      .subscribe(next => {
+        console.log(next);
       }, err => {
           console.log(err);
       });

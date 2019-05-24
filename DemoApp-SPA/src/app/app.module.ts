@@ -14,6 +14,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { HomeComponent } from './home/home.component';
 import { TokenInterceptorService } from './services/token/token-interceptor.service';
 import { CountersComponent } from './counters/counters.component';
+import { ErrorInterceptorProvider } from './services/auth/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -32,11 +33,9 @@ import { CountersComponent } from './counters/counters.component';
     FormsModule,
     StoreModule.forRoot({ count: counterReducer })
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: TokenInterceptorService,
-    multi: true
-  }],
+  providers: [
+    ErrorInterceptorProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
