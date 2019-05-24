@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../services/auth/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -9,17 +10,16 @@ export class HomeComponent implements OnInit {
 
   registerMode = false;
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    this.authService.cancelRegister.subscribe((res: boolean) => {
+      this.registerMode = res;
+    });
   }
 
   registerToggle = () => {
     this.registerMode = true;
-  }
-
-  cancelRegisterMode = (registerMode: boolean) => {
-    this.registerMode = registerMode;
   }
 
 }

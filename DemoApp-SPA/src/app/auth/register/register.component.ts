@@ -1,5 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { UsersService } from 'src/app/services/users/users.service';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -8,16 +9,16 @@ import { UsersService } from 'src/app/services/users/users.service';
 })
 export class RegisterComponent implements OnInit {
 
-  @Output() cancelRegister = new EventEmitter<boolean>();
+  @ViewChild('registerForm') registerForm: NgForm;
   model: any = {};
 
-  constructor(private usersService: UsersService) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
   }
 
   register = () => {
-    this.usersService.register(this.model)
+    this.authService.register(this.model)
       .subscribe(res => {
         console.log(res);
       }, err => {
@@ -25,8 +26,14 @@ export class RegisterComponent implements OnInit {
       });
   }
 
+  reset = () => {
+    console.log('reset');
+    this.registerForm.reset();
+    console.log(this.registerForm);
+  }
+
   cancel = () => {
-    this.cancelRegister.emit(false);
+    this.authService.cancelRegister.next(false);
     console.log('Canceled');
   }
 

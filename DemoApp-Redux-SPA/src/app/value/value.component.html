@@ -1,0 +1,11 @@
+<!-- <ul>
+  <li *ngFor="let value of valueList">
+    {{value.name}}
+  </li>
+</ul> -->
+<ul>
+  <li *ngFor="let value of (values | async).values">
+    {{value.name}}
+  </li>
+</ul>
+<app-counters></app-counters>
