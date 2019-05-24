@@ -12,7 +12,6 @@ import { NavbarComponent } from './core/navbar/navbar.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { HomeComponent } from './home/home.component';
-import { TokenInterceptorService } from './services/token/token-interceptor.service';
 import { CountersComponent } from './counters/counters.component';
 import { ErrorInterceptorProvider } from './services/auth/error.interceptor';
 

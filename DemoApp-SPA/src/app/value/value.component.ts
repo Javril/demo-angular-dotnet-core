@@ -13,10 +13,12 @@ export class ValueComponent implements OnInit {
   constructor(private valuesService: ValuesService) { }
 
   ngOnInit() {
+    console.log('OK');
     this.valuesService.getValues()
       .subscribe(
         response => {
           this.values = response;
+          console.log('this.values: ', this.values);
         },
         error => {
           console.log(error);
