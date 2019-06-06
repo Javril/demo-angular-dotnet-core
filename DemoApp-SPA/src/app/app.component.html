@@ -1,3 +1,17 @@
-<!-- <app-value></app-value> -->
-<app-navbar></app-navbar>
-<router-outlet></router-outlet>
+<!-- <div class="d-flex flex-column h-100"> -->
+    <header>
+        <app-navbar></app-navbar>
+    </header>
+    
+    <main role="main" class="flex-shrink-0">
+        <router-outlet></router-outlet>
+    </main>
+      
+    <footer class="footer mt-auto py-3 fixed-bottom">
+        <div class="container">
+          <span class="text-muted">Place sticky footer content here.</span>
+        </div>
+    </footer>
+<!-- </div> -->
+
+

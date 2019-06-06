@@ -12,6 +12,8 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class NavbarComponent implements OnInit {
 
   user: string;
+  isOpen = false;
+  isMenuOpen = false;
   model: IUser = {username: '', password: ''};
   constructor(
     private router: Router,
@@ -30,9 +32,11 @@ export class NavbarComponent implements OnInit {
       .subscribe(next => {
         this.user = this.authService.decodedToken.unique_name;
         this.alertifyService.success('Logged in successfully');
-        // this.router.navigate(['/values']);
       }, err => {
           this.alertifyService.error(err);
+      }, () => {
+        this.isOpen = false;
+        this.router.navigate(['/members']);
       });
   }
 
@@ -42,8 +46,16 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this.authService.logout();
-    // this.router.navigate(['']);
+    this.router.navigate(['']);
     this.alertifyService.message('Logged out');
+  }
+
+  toggleOpen() {
+    this.isOpen = !this.isOpen;
+  }
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
   }
 
 }

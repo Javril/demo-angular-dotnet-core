@@ -1,0 +1,33 @@
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+}
+
+footer {
+    background-color: #bbb;
+    .text-muted {
+        color: #fff !important;
+    }
+}
+
+main {
+    margin-top: 80px;
+}
+
+// footer {
+//     position: fixed;
+//     background-color: beige;
+//     height: 50px;
+//     bottom: 0;
+//     width: 100%;
+// }
