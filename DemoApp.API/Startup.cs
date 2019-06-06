@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using DemoApp.API.Data;
 using DemoApp.API.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -29,11 +30,19 @@ namespace DemoApp.API {
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+        [Obsolete]
         public void ConfigureServices (IServiceCollection services) {
             services.AddDbContext<DataContext> (x => x.UseSqlite (Configuration.GetConnectionString ("DefaultConnection")));
-            services.AddMvc ().SetCompatibilityVersion (CompatibilityVersion.Version_2_2);
+            services.AddMvc ().SetCompatibilityVersion (CompatibilityVersion.Version_2_2)
+                .AddJsonOptions (opt => {
+                    opt.SerializerSettings.ReferenceLoopHandling =
+                        Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                });
             services.AddCors ();
+            services.AddAutoMapper();
+            services.AddTransient<Seed> ();
             services.AddScoped<IAuthRepository, AuthRepository> ();
+            services.AddScoped<IDatingRepository, DatingRepository> ();
             services.AddAuthentication (JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer (options => {
                     options.TokenValidationParameters = new TokenValidationParameters {
@@ -48,7 +57,7 @@ namespace DemoApp.API {
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure (IApplicationBuilder app, IHostingEnvironment env) {
+        public void Configure (IApplicationBuilder app, IHostingEnvironment env, Seed seeder) {
             if (env.IsDevelopment ()) {
                 app.UseDeveloperExceptionPage ();
             } else {
@@ -59,8 +68,8 @@ namespace DemoApp.API {
 
                         var error = context.Features.Get<IExceptionHandlerFeature> ();
                         if (error != null) {
-                            context.Response.AddApplicationError(error.Error.Message);
-                            await context.Response.WriteAsync(error.Error.Message);
+                            context.Response.AddApplicationError (error.Error.Message);
+                            await context.Response.WriteAsync (error.Error.Message);
                         }
                     });
                 });
@@ -68,6 +77,7 @@ namespace DemoApp.API {
             }
 
             // app.UseHttpsRedirection();
+            // seeder.SeedUsers();
             app.UseCors (x => x.AllowAnyOrigin ().AllowAnyMethod ().AllowAnyHeader ());
             app.UseAuthentication ();
             app.UseMvc ();
