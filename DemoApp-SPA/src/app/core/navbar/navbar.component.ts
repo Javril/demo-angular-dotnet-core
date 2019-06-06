@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from 'src/app/services/users/users.service';
 import { IUser } from 'src/app/services/users/IUser';
 import { Router } from '@angular/router';
+import { AlertifyService } from 'src/app/services/alertify/alertify.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,32 +11,51 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
+  user: string;
+  isOpen = false;
+  isMenuOpen = false;
   model: IUser = {username: '', password: ''};
   constructor(
     private router: Router,
-    private usersService: UsersService
+    private authService: AuthService,
+    private alertifyService: AlertifyService
   ) { }
 
   ngOnInit() {
+    if (this.loggedIn()) {
+      this.user = this.authService.decodedToken.unique_name;
+    }
   }
 
   login = () => {
-    this.usersService.login(this.model)
+    this.authService.login(this.model)
       .subscribe(next => {
-        console.log(next);
+        this.user = this.authService.decodedToken.unique_name;
+        this.alertifyService.success('Logged in successfully');
       }, err => {
-          console.log(err);
+          this.alertifyService.error(err);
+      }, () => {
+        this.isOpen = false;
+        this.router.navigate(['/members']);
       });
   }
 
   loggedIn = () => {
-    return this.usersService.loggedIn();
+    return this.authService.loggedIn();
   }
 
   logout() {
-    this.usersService.logout();
+    this.authService.logout();
     this.router.navigate(['']);
-    console.log('Loggedout');
+    this.alertifyService.message('Logged out');
+  }
+
+  toggleOpen() {
+    this.isOpen = !this.isOpen;
+  }
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
   }
 
 }

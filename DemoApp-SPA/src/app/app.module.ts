@@ -11,10 +11,14 @@ import { ValueComponent } from './value/value.component';
 import { NavbarComponent } from './core/navbar/navbar.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
-import { HomeComponent } from './home/home.component';
-import { TokenInterceptorService } from './services/token/token-interceptor.service';
-import { CountersComponent } from './counters/counters.component';
+import { HomeComponent } from './pages/home/home.component';
 import { ErrorInterceptorProvider } from './services/auth/error.interceptor';
+import { DropdownDirective } from './shared/dropdown/dropdown.directive';
+import { CountersComponent } from './counters/counters.component';
+import { CollapseDirective } from './shared/collapse/collapse.directive';
+import { MembersComponent } from './pages/members/members.component';
+import { MessagesComponent } from './pages/messages/messages.component';
+import { ListsComponent } from './pages/lists/lists.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +28,12 @@ import { ErrorInterceptorProvider } from './services/auth/error.interceptor';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    CountersComponent
+    CountersComponent,
+    DropdownDirective,
+    CollapseDirective,
+    MembersComponent,
+    MessagesComponent,
+    ListsComponent
   ],
   imports: [
     BrowserModule,
