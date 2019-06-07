@@ -6,12 +6,13 @@ import { IUser } from 'src/app/models/IUser';
 import { Subject, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private url = `${AppSetting.API_ENDPOINT}/auth`;
+  private url = `${environment.apiUrl}/auth`;
   cancelRegister = new Subject<false>();
   jwtHelper = new JwtHelperService();
   decodedToken: any;

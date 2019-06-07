@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { IUser } from 'src/app/models/IUser';
+import { UsersService } from 'src/app/services/users/users.service';
+import { AlertifyService } from 'src/app/services/alertify/alertify.service';
 
 @Component({
   selector: 'app-members',
@@ -7,9 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MembersComponent implements OnInit {
 
-  constructor() { }
+  users: IUser[];
+
+  constructor(
+    private usersService: UsersService,
+    private alertify: AlertifyService
+  ) { }
 
   ngOnInit() {
+    this.loadUsers();
+  }
+
+  loadUsers = () => {
+    this.usersService.getUsers()
+    .subscribe(res => {
+      this.users = res;
+      this.alertify.success('Connection avec succes');
+    }, error => {
+        this.alertify.error(error);
+    });
   }
 
 }

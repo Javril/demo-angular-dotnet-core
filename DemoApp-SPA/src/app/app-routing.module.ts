@@ -1,16 +1,26 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { RegisterComponent } from './auth/register/register.component';
 import { HomeComponent } from './pages/home/home.component';
-import { ValueComponent } from './value/value.component';
-import { MembersComponent } from './pages/members/members.component';
 import { MessagesComponent } from './pages/messages/messages.component';
 import { ListsComponent } from './pages/lists/lists.component';
 import { AuthGuard } from './guards/auth.guard';
+import { MemberListComponent } from './pages/members/member-list/member-list.component';
+import { MemberDetailComponent } from './pages/members/member-detail/member-detail.component';
+import { MemberDetailResolver } from './resolvers/member-detail.resolver';
+import { MemberListResolver } from './resolvers/member-list.resolver';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'members', component: MembersComponent, canActivate: [AuthGuard] },
+  {
+    path: 'members',
+    component: MemberListComponent, canActivate: [AuthGuard],
+    resolve: { users: MemberListResolver }
+  },
+  {
+    path: 'members/:id',
+    component: MemberDetailComponent, canActivate: [AuthGuard],
+    resolve: { user: MemberDetailResolver }
+  },
   { path: 'messages', component: MessagesComponent, canActivate: [AuthGuard] },
   { path: 'lists', component: ListsComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '', pathMatch: 'full' }

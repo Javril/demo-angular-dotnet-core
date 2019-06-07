@@ -1,0 +1,12 @@
+<div (click)="$event.preventDefault()"> 
+  <tabset>
+    <tab *ngFor="let tabz of tabs"
+         [heading]="tabz.title"
+         [active]="tabz.active"
+         (selectTab)="tabz.active = true"
+         (deselect)="tabz.active = false"
+         [customClass]="tabz.customClass">
+      {{tabz?.content}}
+    </tab>
+  </tabset>
+</div>

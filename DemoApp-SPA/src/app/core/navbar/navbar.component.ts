@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IUser } from 'src/app/services/users/IUser';
+// import { IUser } from 'src/app/services/users/IUser';
 import { Router } from '@angular/router';
 import { AlertifyService } from 'src/app/services/alertify/alertify.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit {
   user: string;
   isOpen = false;
   isMenuOpen = false;
-  model: IUser = {username: '', password: ''};
+  model: any = {username: '', password: ''};
   constructor(
     private router: Router,
     private authService: AuthService,
