@@ -1,34 +1,29 @@
 import { Injectable } from '@angular/core';
 import { AppSetting } from 'src/app/constants';
-import { HttpClient } from '@angular/common/http';
-import { IUser } from './IUser';
-import { IRegister } from './IRegister';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
+import { IUser } from 'src/app/models/IUser';
+
+// const httpOptions = {
+//   headers: new HttpHeaders({
+//     Authorization: `Bearer ${localStorage.getItem('token')}`
+//   })
+// }
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
-  private url = `${AppSetting.API_ENDPOINT}/auth`;
+  private baseUrl = environment.apiUrl;
 
   constructor(private httpClient: HttpClient) { }
 
-  register = (user: IRegister) => {
-    return this.httpClient.post(`${this.url}/register`, user);
+  getUsers = (): Observable<IUser[]> => {
+    return this.httpClient.get<IUser[]>(`${this.baseUrl}/users`);
   }
 
-  login = (user: IUser) => {
-    return this.httpClient.post(`${this.url}/login`, user);
-  }
-
-  loggedIn() {
-    return !!localStorage.getItem('token'); // Get boolean value
-  }
-
-  getToken() {
-    return localStorage.getItem('token');
-  }
-
-  logout = () => {
-    localStorage.removeItem('token');
+  getUser = (id: number): Observable<IUser> => {
+    return this.httpClient.get<IUser>(`${this.baseUrl}/users/${id}`);
   }
 }
