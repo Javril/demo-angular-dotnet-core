@@ -27,6 +27,7 @@ import { MemberCardComponent } from './pages/members/member-card/member-card.com
 import { MemberDetailComponent } from './pages/members/member-detail/member-detail.component';
 import { TabsComponent } from './core/tabs/tabs.component';
 import { DynamicTabsComponent } from './core/dynamic-tabs/dynamic-tabs.component';
+import { MemberEditComponent } from './pages/members/member-edit/member-edit.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -51,7 +52,8 @@ export function tokenGetter() {
     MemberCardComponent,
     MemberDetailComponent,
     TabsComponent,
-    DynamicTabsComponent
+    DynamicTabsComponent,
+    MemberEditComponent
   ],
   imports: [
     BrowserModule,
