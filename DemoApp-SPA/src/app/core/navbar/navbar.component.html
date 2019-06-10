@@ -18,6 +18,9 @@
       </ul>
     </div>
     <div *ngIf="loggedIn()" class="dropdown" appDropdown (click)="toggleOpen()">
+      <span class="mr-1">
+        <img src="{{photoUrl || '../../assets/user.png'}}" alt="">
+      </span>
       <a class="dropdown-toggle text-light">
         Welcome {{ user }}
       </a>

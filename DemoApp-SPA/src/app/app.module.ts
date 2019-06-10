@@ -7,6 +7,7 @@ import { counterReducer } from './redux/counter/counter.reducer';
 import { JwtModule } from '@auth0/angular-jwt';
 import { TabsModule } from 'ngx-bootstrap';
 import { NgxGalleryModule } from 'ngx-gallery';
+import { FileUploadModule } from 'ng2-file-upload';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,6 +29,7 @@ import { MemberDetailComponent } from './pages/members/member-detail/member-deta
 import { TabsComponent } from './core/tabs/tabs.component';
 import { DynamicTabsComponent } from './core/dynamic-tabs/dynamic-tabs.component';
 import { MemberEditComponent } from './pages/members/member-edit/member-edit.component';
+import { PhotoEditorComponent } from './pages/members/member-edit/photo-editor/photo-editor.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -53,7 +55,8 @@ export function tokenGetter() {
     MemberDetailComponent,
     TabsComponent,
     DynamicTabsComponent,
-    MemberEditComponent
+    MemberEditComponent,
+    PhotoEditorComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +64,7 @@ export function tokenGetter() {
     HttpClientModule,
     FormsModule,
     NgxGalleryModule,
+    FileUploadModule,
     TabsModule.forRoot(),
     StoreModule.forRoot({ count: counterReducer }),
     JwtModule.forRoot({

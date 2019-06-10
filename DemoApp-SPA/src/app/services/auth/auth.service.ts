@@ -3,7 +3,7 @@ import { AppSetting } from 'src/app/constants';
 import { HttpClient } from '@angular/common/http';
 import { IRegister } from 'src/app/models/IRegister';
 import { IUser } from 'src/app/models/IUser';
-import { Subject, from } from 'rxjs';
+import { Subject, from, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
@@ -12,24 +12,30 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
-  private url = `${environment.apiUrl}/auth`;
+  private baseUrl = `${environment.apiUrl}/auth`;
   cancelRegister = new Subject<false>();
   jwtHelper = new JwtHelperService();
   decodedToken: any;
+  currentUser: IUser;
+  photoUrl = new BehaviorSubject<string>('../../assets/user.png');
+  currentPhotoUrl = this.photoUrl.asObservable();
 
   constructor(private httpClient: HttpClient) { }
 
-  register = (user: IRegister) => {
-    return this.httpClient.post(`${this.url}/register`, user);
+  changeMemberPhoto(photoUrl: string) {
+    this.photoUrl.next(photoUrl);
   }
 
   login = (model: IUser) => {
-    return this.httpClient.post(`${this.url}/login`, model)
+    return this.httpClient.post(`${this.baseUrl}/login`, model)
       .pipe(map((response: any) => {
         const user = response;
         if (user) {
           localStorage.setItem('token', user.token);
+          localStorage.setItem('user', JSON.stringify(user.user));
           this.decodedToken = this.getDecodedToken(user.token);
+          this.currentUser = user.user;
+          this.changeMemberPhoto(this.currentUser.photoUrl);
         }
       }));
   }
@@ -46,6 +52,10 @@ export class AuthService {
 
   logout = () => {
     localStorage.removeItem('token');
+  }
+
+  register = (user: IRegister) => {
+    return this.httpClient.post(`${this.baseUrl}/register`, user);
   }
 
   getDecodedToken(token: string) {

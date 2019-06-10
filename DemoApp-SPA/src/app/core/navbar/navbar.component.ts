@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class NavbarComponent implements OnInit {
 
   user: string;
+  photoUrl: string;
   isOpen = false;
   isMenuOpen = false;
   model: any = {username: '', password: ''};
@@ -23,6 +24,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     if (this.loggedIn()) {
+      this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
       this.user = this.authService.decodedToken.unique_name;
     }
   }
