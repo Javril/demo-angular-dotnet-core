@@ -39,7 +39,8 @@ namespace DemoApp.API {
                         Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 });
             services.AddCors ();
-            services.AddAutoMapper();
+            services.Configure<CloudinarySettings> (Configuration.GetSection ("CloudinarySettings"));
+            services.AddAutoMapper ();
             services.AddTransient<Seed> ();
             services.AddScoped<IAuthRepository, AuthRepository> ();
             services.AddScoped<IDatingRepository, DatingRepository> ();
