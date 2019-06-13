@@ -26,6 +26,8 @@ export class MemberDetailComponent implements OnInit {
     // this.loadUser();
     this.route.data.subscribe(data => {
       this.user = data.user;
+      // this.user.photoUrl = this.user.gender ===
+      // 'male' ? '../../assets/male.png' : '../../assets/female.png';
     });
 
     this.galleryOptions = [
