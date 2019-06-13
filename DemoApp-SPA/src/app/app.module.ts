@@ -9,6 +9,8 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { TabsModule, BsDatepickerModule } from 'ngx-bootstrap';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
+// import { TimeagoModule } from 'ngx-timeago';
+import { TimeagoModule, TimeagoIntl, TimeagoFormatter, TimeagoCustomFormatter } from 'ngx-timeago';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,6 +36,10 @@ import { PhotoEditorComponent } from './pages/members/member-edit/photo-editor/p
 
 export function tokenGetter() {
   return localStorage.getItem('token');
+}
+
+export class MyIntl extends TimeagoIntl {
+  // do extra stuff here...
 }
 
 
@@ -69,6 +75,10 @@ export function tokenGetter() {
     ReactiveFormsModule,
     TabsModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    TimeagoModule.forRoot({
+      intl: { provide: TimeagoIntl, useClass: MyIntl },
+      formatter: { provide: TimeagoFormatter, useClass: TimeagoCustomFormatter },
+    }),
     StoreModule.forRoot({ count: counterReducer }),
     JwtModule.forRoot({
       config: {
