@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/auth/auth.service';
 import { IUser } from './models/IUser';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { TimeagoIntl } from 'ngx-timeago';
+import {strings as englishStrings} from 'ngx-timeago/language-strings/en';
 
 @Component({
   selector: 'app-root',
@@ -13,8 +15,12 @@ export class AppComponent implements OnInit {
   jwtHelper = new JwtHelperService();
 
   constructor(
-    private authService: AuthService
-  ) { }
+    private authService: AuthService,
+    intl: TimeagoIntl
+  ) {
+    intl.strings = englishStrings;
+    intl.changes.next();
+  }
 
   ngOnInit() {
     const token = localStorage.getItem('token');
