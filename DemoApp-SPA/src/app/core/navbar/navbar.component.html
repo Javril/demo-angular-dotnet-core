@@ -19,10 +19,10 @@
     </div>
     <div *ngIf="loggedIn()" class="dropdown" appDropdown (click)="toggleOpen()">
       <span class="mr-1">
-        <img src="{{photoUrl || '../../assets/user.png'}}" alt="">
+        <img [src]="photoUrl || defaultPhotoUrl" alt="">
       </span>
       <a class="dropdown-toggle text-light">
-        Welcome {{ user }}
+        Welcome {{ authService.decodedToken.unique_name | titlecase}}
       </a>
       <div [class.open]="isOpen" mt-15 class="dropdown-menu">
         <a class="dropdown-item" [routerLink]="['/member/edit']" ><i class="fa fa-user"></i> Edit Profile</a>

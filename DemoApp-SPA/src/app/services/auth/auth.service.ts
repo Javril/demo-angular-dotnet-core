@@ -54,7 +54,7 @@ export class AuthService {
     localStorage.removeItem('token');
   }
 
-  register = (user: IRegister) => {
+  register = (user: IUser) => {
     return this.httpClient.post(`${this.baseUrl}/register`, user);
   }
 

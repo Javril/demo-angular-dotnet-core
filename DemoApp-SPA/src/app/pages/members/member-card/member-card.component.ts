@@ -12,6 +12,11 @@ export class MemberCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    if (!this.user.photoUrl) {
+      this.user.photoUrl = this.user.gender ===
+      'male' ? '../../assets/male.png' : '../../assets/female.png';
+    }
+    // console.log(this.user.photoUrl);
   }
 
 }

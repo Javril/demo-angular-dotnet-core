@@ -33,8 +33,10 @@ export class MemberEditComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.user = data.user;
+      // this.user.photoUrl = this.user.gender ===
+      // 'male' ? '../../assets/male.png' : '../../assets/female.png';
     });
-    // this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
+    this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
   }
 
   updateUser() {
@@ -48,6 +50,7 @@ export class MemberEditComponent implements OnInit {
 
   updateMainPhoto = (photoUrl: string) => {
     this.user.photoUrl = photoUrl;
+    this.editForm.reset(this.user);
   }
 
 }

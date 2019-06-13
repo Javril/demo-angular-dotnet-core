@@ -1,11 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { counterReducer } from './redux/counter/counter.reducer';
 import { JwtModule } from '@auth0/angular-jwt';
-import { TabsModule } from 'ngx-bootstrap';
+import { TabsModule, BsDatepickerModule } from 'ngx-bootstrap';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
 
@@ -65,7 +66,9 @@ export function tokenGetter() {
     FormsModule,
     NgxGalleryModule,
     FileUploadModule,
+    ReactiveFormsModule,
     TabsModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     StoreModule.forRoot({ count: counterReducer }),
     JwtModule.forRoot({
       config: {
