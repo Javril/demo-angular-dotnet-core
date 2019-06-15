@@ -14,19 +14,22 @@ using Microsoft.IdentityModel.Tokens;
 namespace DemoApp.API.Controllers {
     [Route ("api/[controller]")]
     [ApiController]
-    public class AuthController : ControllerBase {
+    public class AuthController : ControllerBase 
+    {
         private readonly IAuthRepository _repo;
         private readonly IConfiguration _config;
         private readonly IMapper _mapper;
 
-        public AuthController (IAuthRepository repo, IConfiguration config, IMapper mapper) {
+        public AuthController (IAuthRepository repo, IConfiguration config, IMapper mapper) 
+        {
             _config = config;
             _repo = repo;
             _mapper = mapper;
         }
 
         [HttpPost ("register")]
-        public async Task<IActionResult> Register (UserForRegisterDto userForRegisterDto) {
+        public async Task<IActionResult> Register (UserForRegisterDto userForRegisterDto) 
+        {
             userForRegisterDto.Username = userForRegisterDto.Username.ToLower ();
 
             if (await _repo.UserExists (userForRegisterDto.Username))
@@ -42,13 +45,15 @@ namespace DemoApp.API.Controllers {
         }
 
         [HttpPost ("login")]
-        public async Task<IActionResult> Login (UserForLoginDto userForLoginDto) {
+        public async Task<IActionResult> Login (UserForLoginDto userForLoginDto) 
+        {
             var userFromRepo = await _repo.Login (userForLoginDto.Username.ToLower (), userForLoginDto.Password);
 
             if (userFromRepo == null)
                 return Unauthorized ();
 
-            var claims = new [] {
+            var claims = new [] 
+            {
                 new Claim (ClaimTypes.NameIdentifier, userFromRepo.Id.ToString ()),
                 new Claim (ClaimTypes.Name, userFromRepo.Username)
             };
@@ -58,7 +63,8 @@ namespace DemoApp.API.Controllers {
 
             var creds = new SigningCredentials (key, SecurityAlgorithms.HmacSha512Signature);
 
-            var tokenDescriptor = new SecurityTokenDescriptor {
+            var tokenDescriptor = new SecurityTokenDescriptor 
+            {
                 Subject = new ClaimsIdentity (claims),
                 Expires = DateTime.Now.AddDays (1),
                 SigningCredentials = creds
@@ -70,7 +76,8 @@ namespace DemoApp.API.Controllers {
 
             var user = _mapper.Map<UserForListDto> (userFromRepo);
 
-            return Ok (new {
+            return Ok (new 
+            {
                 token = tokenHandler.WriteToken (token),
                     user
             });

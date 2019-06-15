@@ -10,6 +10,9 @@ import { catchError } from 'rxjs/operators';
     providedIn: 'root'
 })
 export class MemberListResolver implements Resolve<IUser[]> {
+    pageNumber = 1;
+    pageSize = 5;
+
     constructor(
         private usersService: UsersService,
         private router: Router,
@@ -17,7 +20,7 @@ export class MemberListResolver implements Resolve<IUser[]> {
     ) { }
 
     resolve(route: ActivatedRouteSnapshot): Observable<IUser[]> {
-        return this.usersService.getUsers().pipe(
+        return this.usersService.getUsers(this.pageNumber, this.pageSize).pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving data: ' + error);
                 this.router.navigate(['/home']);
