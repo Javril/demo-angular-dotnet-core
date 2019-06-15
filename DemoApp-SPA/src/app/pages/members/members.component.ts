@@ -10,25 +10,25 @@ import { AlertifyService } from 'src/app/services/alertify/alertify.service';
 })
 export class MembersComponent implements OnInit {
 
-  users: IUser[];
+  // users: IUser[];
 
-  constructor(
-    private usersService: UsersService,
-    private alertify: AlertifyService
-  ) { }
+  // constructor(
+  //   private usersService: UsersService,
+  //   private alertify: AlertifyService
+  // ) { }
 
   ngOnInit() {
-    this.loadUsers();
+    // this.loadUsers();
   }
 
-  loadUsers = () => {
-    this.usersService.getUsers()
-    .subscribe(res => {
-      this.users = res;
-      this.alertify.success('Connection avec succes');
-    }, error => {
-        this.alertify.error(error);
-    });
-  }
+  // loadUsers = () => {
+  //   this.usersService.getUsers()
+  //   .subscribe(res => {
+  //     this.users = res.result;
+  //     this.alertify.success('Connection avec succes');
+  //   }, error => {
+  //       this.alertify.error(error);
+  //   });
+  // }
 
 }

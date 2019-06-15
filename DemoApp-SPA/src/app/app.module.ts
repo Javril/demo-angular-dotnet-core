@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { counterReducer } from './redux/counter/counter.reducer';
 import { JwtModule } from '@auth0/angular-jwt';
-import { TabsModule, BsDatepickerModule } from 'ngx-bootstrap';
+import { TabsModule, BsDatepickerModule, PaginationModule, ButtonsModule } from 'ngx-bootstrap';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
 // import { TimeagoModule } from 'ngx-timeago';
@@ -75,6 +75,8 @@ export class MyIntl extends TimeagoIntl {
     ReactiveFormsModule,
     TabsModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    PaginationModule.forRoot(),
+    ButtonsModule.forRoot(),
     TimeagoModule.forRoot({
       intl: { provide: TimeagoIntl, useClass: MyIntl },
       formatter: { provide: TimeagoFormatter, useClass: TimeagoCustomFormatter },
