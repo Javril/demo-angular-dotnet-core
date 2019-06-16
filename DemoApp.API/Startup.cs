@@ -22,8 +22,10 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace DemoApp.API {
-    public class Startup {
-        public Startup (IConfiguration configuration) {
+    public class Startup 
+    {
+        public Startup (IConfiguration configuration) 
+        {
             Configuration = configuration;
         }
 
@@ -31,7 +33,8 @@ namespace DemoApp.API {
 
         // This method gets called by the runtime. Use this method to add services to the container.
         [Obsolete]
-        public void ConfigureServices (IServiceCollection services) {
+        public void ConfigureServices (IServiceCollection services) 
+        {
             services.AddDbContext<DataContext> (x => x.UseSqlite (Configuration.GetConnectionString ("DefaultConnection")));
             services.AddMvc ().SetCompatibilityVersion (CompatibilityVersion.Version_2_2)
                 .AddJsonOptions (opt => {
@@ -59,10 +62,14 @@ namespace DemoApp.API {
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure (IApplicationBuilder app, IHostingEnvironment env, Seed seeder) {
-            if (env.IsDevelopment ()) {
+        public void Configure (IApplicationBuilder app, IHostingEnvironment env, Seed seeder) 
+        {
+            if (env.IsDevelopment ()) 
+            {
                 app.UseDeveloperExceptionPage ();
-            } else {
+            } 
+            else 
+            {
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseExceptionHandler (builder => {
                     builder.Run (async context => {
