@@ -19,9 +19,9 @@ import { map } from 'rxjs/operators';
 export class UsersService {
   private baseUrl = environment.apiUrl;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getUsers = (page?, itemsPerPage?, userParams?): Observable<PaginatedResult<IUser[]>> => {
+  getUsers(page?, itemsPerPage?, userParams?, likesParam?): Observable<PaginatedResult<IUser[]>> {
     const paginatedResult: PaginatedResult<IUser[]> = new PaginatedResult<IUser[]>();
 
     let params = new HttpParams();
@@ -38,30 +38,43 @@ export class UsersService {
       params = params.append('orderBy', userParams.orderBy);
     }
 
-    return this.httpClient.get<IUser[]>(`${this.baseUrl}/users`, { observe: 'response', params}).pipe(
-      map(response => {
-        paginatedResult.result = response.body;
-        if (response.headers.get('Pagination') != null) {
-          paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'))
-        }
-        return paginatedResult;
-      })
-    );
+    if (likesParam === 'Likers') {
+      params = params.append('Likers', 'true');
+    }
+
+    if (likesParam === 'Likees') {
+      params = params.append('Likees', 'true');
+    }
+
+    return this.http.get<IUser[]>(this.baseUrl + '/users', { observe: 'response', params})
+      .pipe(
+        map(response => {
+          paginatedResult.result = response.body;
+          if (response.headers.get('Pagination') != null) {
+            paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+          }
+          return paginatedResult;
+        })
+      );
   }
 
-  getUser = (id: number): Observable<IUser> => {
-    return this.httpClient.get<IUser>(`${this.baseUrl}/users/${id}`);
+  getUser(id: number): Observable<IUser> {
+    return this.http.get<IUser>(`${this.baseUrl}/users/${id}`);
   }
 
-  updateUser = (id: number, user: IUser) => {
-    return this.httpClient.put(`${this.baseUrl}/users/${id}`, user);
+  updateUser(id: number, user: IUser) {
+    return this.http.put(`${this.baseUrl}/users/${id}`, user);
   }
 
   setMainPhoto(userId: number, id: number) {
-    return this.httpClient.post(`${this.baseUrl}/users/${userId}/photos/${id}/setMain`, {});
+    return this.http.post(`${this.baseUrl}/users/${userId}/photos/${id}/setMain`, {});
   }
 
   deletePhoto(userId: number, id: number) {
-    return this.httpClient.delete(`${this.baseUrl}/users/${userId}/photos/${id}`);
+    return this.http.delete(`${this.baseUrl}/users/${userId}/photos/${id}`);
+  }
+
+  sendLike(id: number, recipientId: number) {
+    return this.http.post(`${this.baseUrl}/users/${id}/like/${recipientId}`, {});
   }
 }
