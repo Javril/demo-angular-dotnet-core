@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertifyService } from 'src/app/services/alertify/alertify.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { strings as englishStrings } from 'ngx-timeago/language-strings/en';
+import {strings as frenchStrings} from 'ngx-timeago/language-strings/fr';
+import { TranslateService } from '@ngx-translate/core';
+import { TimeagoIntl } from 'ngx-timeago';
 
 @Component({
   selector: 'app-navbar',
@@ -19,7 +23,9 @@ export class NavbarComponent implements OnInit {
   constructor(
     private router: Router,
     public authService: AuthService,
-    private alertify: AlertifyService
+    private alertify: AlertifyService,
+    public translate: TranslateService,
+    public intl: TimeagoIntl
   ) { }
 
   toggleOpen() {
@@ -48,6 +54,11 @@ export class NavbarComponent implements OnInit {
     }, () => {
       this.router.navigate(['/members']);
     });
+  }
+
+  changeTimeAgo = (lang: string) => {
+    this.intl.strings = lang === 'en' ? englishStrings : frenchStrings;
+    this.intl.changes.next();
   }
 
   loggedIn() {
