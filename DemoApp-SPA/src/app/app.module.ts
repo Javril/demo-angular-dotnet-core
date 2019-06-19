@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { counterReducer } from './redux/counter/counter.reducer';
@@ -33,6 +35,7 @@ import { TabsComponent } from './core/tabs/tabs.component';
 import { DynamicTabsComponent } from './core/dynamic-tabs/dynamic-tabs.component';
 import { MemberEditComponent } from './pages/members/member-edit/member-edit.component';
 import { PhotoEditorComponent } from './pages/members/member-edit/photo-editor/photo-editor.component';
+import { MemberMessagesComponent } from './pages/members/member-messages/member-messages.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -42,6 +45,14 @@ export class MyIntl extends TimeagoIntl {
   // do extra stuff here...
 }
 
+// AoT requires an exported function for factories
+// export function HttpLoaderFactory(httpClient: HttpClient) {
+//   return new TranslateHttpLoader(httpClient);
+// }
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -63,7 +74,8 @@ export class MyIntl extends TimeagoIntl {
     TabsComponent,
     DynamicTabsComponent,
     MemberEditComponent,
-    PhotoEditorComponent
+    PhotoEditorComponent,
+    MemberMessagesComponent
   ],
   imports: [
     BrowserModule,
@@ -80,6 +92,13 @@ export class MyIntl extends TimeagoIntl {
     TimeagoModule.forRoot({
       intl: { provide: TimeagoIntl, useClass: MyIntl },
       formatter: { provide: TimeagoFormatter, useClass: TimeagoCustomFormatter },
+    }),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
     }),
     StoreModule.forRoot({ count: counterReducer }),
     JwtModule.forRoot({
