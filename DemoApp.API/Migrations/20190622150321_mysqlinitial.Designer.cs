@@ -9,14 +9,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DemoApp.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190617151605_MessageEntityAdded")]
-    partial class MessageEntityAdded
+    [Migration("20190622150321_mysqlinitial")]
+    partial class mysqlinitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062");
+                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("DemoApp.API.Models.Like", b =>
                 {
